@@ -51,7 +51,7 @@ spec:
       description: The relative path in the workspace to the stored pyxis data json
   steps:
     - name: create-pyxis-image
-      image: quay.io/konflux-ci/release-service-utils:d7e40d79fbf859d80d0d46bebe1a92f6895efc61
+      image: quay.io/lmendes/release-utils@sha256:b255804471cf9fffaf66e08fed5cf5d8c3e58eea6843d9573b84e83aae03dc95
       env:
         - name: pyxisCert
           valueFrom:

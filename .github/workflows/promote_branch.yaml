@@ -30,6 +30,18 @@ on:
         type: boolean
         required: true
         default: false
+      create-release-service-infra-pr:
+        description: |
+          Create Release Service Infra PR: Create a PR to infra-deployments to promote the Release Service
+        type: boolean
+        required: true
+        default: false
+      create-internal-services-infra-pr:
+        description: |
+          Create Internal Services Infra PR: Create a PR to infra-deployments to promote the Internal Services
+        type: boolean
+        required: true
+        default: false
       update-jira-tickets:
         description: |
           Update Jira tickets: Update Jira tickets that have been promoted
@@ -114,6 +126,8 @@ jobs:
           DRY: ${{ inputs.dry-run }}
           OVERRIDE_HOTFIX: ${{ inputs.override-hotfix-check }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          RELEASE_SERVICE_INFRA_PR: ${{ inputs.create-release-service-infra-pr }}
+          INTERNAL_SERVICES_INFRA_PR: ${{ inputs.create-internal-services-infra-pr }}
 
       - name: Update Jira ticket(s)
         if: |

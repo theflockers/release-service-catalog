@@ -129,11 +129,10 @@ jobs:
 
       - name: Create Release Controller PR to infra-deployments
         if: |
-          steps.promote.outcome == 'success' &&
+          steps.promote.outcome == 'success'
         run:
           curl -o promote-overlay.sh https://raw.githubusercontent.com/konflux-ci/release-service-utils/refs/heads/main/ci/promote-overlay/promote-overlay.sh
           chmod +x promote-overlay.sh
-
           # Determine source and target overlays
           if [ "${{ inputs.promotion-type }}" = "development-to-staging" ]; then
             FROM_BRANCH="development"
@@ -143,8 +142,12 @@ jobs:
             TO_BRANCH="production"
           fi
 
+          echo "Should we create PRs to update release and internal-services controller?"
+
+          set -x
           PROMOTE_RELEASE_SERVICE=${{ inputs.create-release-service-infra-pr }}
           PROMOTE_INTERNAL_SERVICES=${{ inputs.create-internal-services-infra-pr }}
+          set +x
 
           if [ $PROMOTE_RELEASE_SERVICE == "true" ]; then
             ./promote-overlay.sh --release --source-overlay $FROM_BRANCH --target-overlay $TO_BRANCH --fork-owner ${{github.actor}}

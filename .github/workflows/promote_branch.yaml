@@ -131,6 +131,8 @@ jobs:
       - name: Create Release Controller PR to infra-deployments
         if: |
           steps.promote.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           curl -o promote-overlay.sh https://raw.githubusercontent.com/konflux-ci/release-service-utils/refs/heads/main/ci/promote-overlay/promote-overlay.sh
           chmod +x promote-overlay.sh

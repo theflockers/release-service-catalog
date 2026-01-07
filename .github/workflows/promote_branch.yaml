@@ -117,8 +117,9 @@ jobs:
       - name: Run branch promotion script
         id: promote
         run: |
-          .github/scripts/promote_branch.sh --promotion-type $PROMOTION_TYPE --force-to-staging $FORCE \
-            --override $OVERRIDE --dry-run $DRY --override-hotfix-check $OVERRIDE_HOTFIX
+          echo "No promotion for you"
+          #.github/scripts/promote_branch.sh --promotion-type $PROMOTION_TYPE --force-to-staging $FORCE \
+          #  --override $OVERRIDE --dry-run $DRY --override-hotfix-check $OVERRIDE_HOTFIX
         env:
           PROMOTION_TYPE: ${{ inputs.promotion-type }}
           FORCE: ${{ inputs.force-to-staging }}
